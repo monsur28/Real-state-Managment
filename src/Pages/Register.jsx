@@ -1,20 +1,68 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Login = () => {
+const Register = () => {
+  const { createUser } = useContext(AuthContext);
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const name = form.get("name");
+    const photo = form.get("photo");
+    const email = form.get("email");
+    const password = form.get("password");
+    console.log(name, photo, email, password);
+
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        toast.success("Logged in Succesfully");
+      })
+      .catch(() => {
+        toast.error("Something Error");
+      });
+  };
   return (
     <div className="flex justify-center items-center">
-      <div className="w-full max-w-md p-8 space-y-3 shadow-lg border border-black rounded-xl dark:bg-gray-50 dark:text-gray-800">
-        <h1 className="text-2xl font-bold text-center">Login</h1>
-        <form noValidate="" action="" className="space-y-6">
+      <div className="w-full max-w-md p-8 shadow-lg border border-black space-y-3 rounded-xl dark:bg-gray-50 dark:text-gray-800">
+        <h1 className="text-2xl font-bold text-center">Register</h1>
+        <form
+          onSubmit={handleRegister}
+          noValidate=""
+          action=""
+          className="space-y-6"
+        >
           <div className="space-y-1 text-sm">
-            <label htmlFor="username" className="block dark:text-gray-600">
-              Username
+            <label htmlFor="Name" className="block dark:text-gray-600">
+              Name
             </label>
             <input
               type="text"
-              name="username"
-              id="username"
-              placeholder="Username"
+              name="name"
+              id="name"
+              placeholder="Name"
+              className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+            />
+            <label htmlFor="PhotoUrl" className="block dark:text-gray-600">
+              Photo Url
+            </label>
+            <input
+              type="text"
+              name="photo"
+              id="photoUrl"
+              placeholder="Photo Url"
+              className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+            />
+            <label htmlFor="Email" className="block dark:text-gray-600">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
               className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
             />
           </div>
@@ -42,7 +90,7 @@ const Login = () => {
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
           <p className="px-3 text-sm dark:text-gray-600">
-            Login with social accounts
+            Register with social accounts
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
         </div>
@@ -76,18 +124,19 @@ const Login = () => {
           </button>
         </div>
         <p className="text-xs text-center sm:px-6 dark:text-gray-600">
-          Dont have an account?
+          have an account?
           <a
             rel="noopener noreferrer"
             href="#"
             className="underline dark:text-gray-800"
           >
-            <Link to="/register">Register</Link>
+            <Link to="/login">Login</Link>
           </a>
         </p>
       </div>
+      <ToastContainer />
     </div>
   );
 };
 
-export default Login;
+export default Register;
