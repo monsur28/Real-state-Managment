@@ -4,8 +4,10 @@ import Footer from "../Layout/Footer";
 const Root = () => {
   return (
     <div>
-      <Navbar></Navbar>
-      <Outlet />
+      <div className="max-w-7xl mx-auto">
+        <Navbar></Navbar>
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

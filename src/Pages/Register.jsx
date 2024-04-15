@@ -1,11 +1,20 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { IoEyeOutline } from "react-icons/io5";
+import { FaRegEyeSlash } from "react-icons/fa";
+import "animate.css";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, googleSignIn } = useContext(AuthContext);
+  const [registerError, setRegisterError] = useState("");
+  const [showPass, setShowPass] = useState(false);
+  const navigate = useNavigate();
+
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -14,18 +23,51 @@ const Register = () => {
     const email = form.get("email");
     const password = form.get("password");
     console.log(name, photo, email, password);
+    if (password.length < 6) {
+      setRegisterError("Password Should be at least 6 characters or longer");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      setRegisterError("Must have an Uppercase letter in the password");
+      return;
+    } else if (!/[0-9]/.test(password)) {
+      setRegisterError("Your password Should have a Number");
+      return;
+    } else if (!/[a-z]/.test(password)) {
+      setRegisterError("Must have a Lowercase letter in the password");
+      return;
+    }
 
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
-        toast.success("Logged in Succesfully");
+        MySwal.fire({
+          title: "Good job!",
+          text: "Registered Succesfully",
+          icon: "success",
+        });
+        navigate("/");
       })
-      .catch(() => {
-        toast.error("Something Error");
+      .catch((error) => {
+        MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.message}`,
+        });
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log("google Success", result.user);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
       });
   };
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center animate__zoomIn items-center animate__animated animate__bounce">
       <div className="w-full max-w-md p-8 shadow-lg border border-black space-y-3 rounded-xl dark:bg-gray-50 dark:text-gray-800">
         <h1 className="text-2xl font-bold text-center">Register</h1>
         <form
@@ -67,15 +109,21 @@ const Register = () => {
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label htmlFor="password" className="block dark:text-gray-600">
-              Password
+            <label className="label">
+              <span className="label-text">Password</span>
+              <span
+                className="relative top-11 text-xl mr-2"
+                onClick={() => setShowPass(!showPass)}
+              >
+                {showPass ? <IoEyeOutline /> : <FaRegEyeSlash />}
+              </span>
             </label>
             <input
-              type="password"
+              type={showPass ? "text" : "password"}
+              placeholder="password"
               name="password"
-              id="password"
-              placeholder="Password"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+              className="w-full px-4 py-3 rounded-md border border-black dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+              required
             />
             <div className="flex justify-end text-xs dark:text-gray-600">
               <a rel="noopener noreferrer" href="#">
@@ -86,6 +134,7 @@ const Register = () => {
           <button className="block w-full p-3 text-center rounded-sm dark:text-gray-50 dark:bg-violet-600">
             Sign in
           </button>
+          {registerError && <p className="text-red-800">{registerError}</p>}
         </form>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
@@ -95,7 +144,11 @@ const Register = () => {
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
         </div>
         <div className="flex justify-center space-x-4">
-          <button aria-label="Log in with Google" className="p-3 rounded-sm">
+          <button
+            onClick={handleGoogleSignIn}
+            aria-label="Log in with Google"
+            className="p-3 rounded-sm"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
@@ -134,7 +187,6 @@ const Register = () => {
           </a>
         </p>
       </div>
-      <ToastContainer />
     </div>
   );
 };

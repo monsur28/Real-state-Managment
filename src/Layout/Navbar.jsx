@@ -1,14 +1,39 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("LogOut Sucessfully");
+      })
+      .catch((error) => {
+        MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.message}`,
+        });
+      });
+  };
+
   const links = (
     <>
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
-      <li>
-        <NavLink to="/profile">Profile</NavLink>
-      </li>
+      {user && (
+        <li>
+          <NavLink to="/profile">Profile</NavLink>
+        </li>
+      )}
       <li>
         <NavLink to="/contact">Contact</NavLink>
       </li>
@@ -55,19 +80,31 @@ const Navbar = () => {
             role="button"
             className="btn btn-ghost btn-circle avatar "
           >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-              />
-            </div>
+            {user && (
+              <div className="w-10 rounded-full">
+                <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
+                <div
+                  className="tooltip hover:data-tip"
+                  data-tip={user.displayName}
+                >
+                  <button className="btn">Hover me</button>
+                </div>
+              </div>
+            )}
           </div>
           <div>
-            <Link to="/login">
-              <a className="btn">Login</a>
-            </Link>
+            {user ? (
+              <button onClick={handleLogOut} className="btn">
+                LogOut
+              </button>
+            ) : (
+              <Link to="/login">
+                <a className="btn">Login</a>
+              </Link>
+            )}
           </div>
         </div>
+        <ToastContainer />
       </div>
     </div>
   );

@@ -1,0 +1,122 @@
+[
+  {
+    "image": "https://i.ibb.co/8jbKm6V/177040614.jpg",
+    "estate_title": "Luxury Villa with Ocean View",
+    "id": "1",
+    "category": "Single-family homes",
+    "description": "Stunning villa with panoramic ocean views, featuring modern architecture and luxurious amenities.",
+    "price": "$1,500,000",
+    "status": "Sale",
+    "area": "4500 sq ft",
+    "location": "Malibu, California",
+    "facilities": ["living room", "swimming pool", "kitchen"]
+  },
+  {
+    "image": "https://i.ibb.co/VH7HwzX/istockphoto-1354034892-1024x1024-transformed.jpg",
+    "estate_title": "Cozy Suburban Home",
+    "id": "2",
+    "category": "Single-family homes",
+    "description": "Charming family home located in a peaceful suburban neighborhood, perfect for raising children.",
+    "price": "$400,000",
+    "status": "Sale",
+    "area": "2500 sq ft",
+    "location": "Sunnyvale, California",
+    "facilities": ["living room", "backyard", "garage"]
+  },
+  {
+    "image": "https://i.ibb.co/7yHkJQ1/301520287.jpg",
+    "estate_title": "Modern City Apartment",
+    "id": "3",
+    "category": "Apartments",
+    "description": "Sleek and stylish apartment in the heart of the city, offering convenience and contemporary living.",
+    "price": "$800,000",
+    "status": "Sale",
+    "area": "1200 sq ft",
+    "location": "Manhattan, New York",
+    "facilities": ["living room", "gym", "rooftop terrace"]
+  },
+  {
+    "image": "https://i.ibb.co/QCdF2pP/303497357-187807806963412-934476195519526862-n.jpg",
+    "estate_title": "Riverside Retreat",
+    "id": "4",
+    "category": "Vacation Rentals",
+    "description": "Tranquil retreat nestled along the riverbank, surrounded by lush greenery and wildlife.",
+    "price": "$600/night",
+    "status": "Rent",
+    "area": "3000 sq ft",
+    "location": "Boulder, Colorado",
+    "facilities": ["living room", "fireplace", "garden"]
+  },
+  {
+    "image": "https://i.ibb.co/hDv3cJD/sean-mcgee-Yzai-Sw13-SU-unsplash.jpg",
+    "estate_title": "Seaside Cottage",
+    "id": "5",
+    "category": "Vacation Rentals",
+    "description": "Quaint cottage steps away from the beach, perfect for a relaxing getaway.",
+    "price": "$300/night",
+    "status": "Rent",
+    "area": "1500 sq ft",
+    "location": "Santa Cruz, California",
+    "facilities": ["living room", "deck", "ocean view"]
+  },
+  {
+    "image": "https://i.ibb.co/dJKQvYW/1550-Light-Brown-and-Orange-Real-Estate-Open-House-Flyer-3.jpg",
+    "estate_title": "Mountain Chalet",
+    "id": "6",
+    "category": "Vacation Rentals",
+    "description": "Charming chalet nestled in the mountains, offering stunning views and access to outdoor activities.",
+    "price": "$400/night",
+    "status": "Rent",
+    "area": "2800 sq ft",
+    "location": "Aspen, Colorado",
+    "facilities": ["living room", "fireplace", "ski-in/ski-out"]
+  },
+  {
+    "image": "https://i.ibb.co/d2zPfGr/1-ecohome-FEAT.jpg",
+    "estate_title": "Eco-Friendly Townhouse",
+    "id": "7",
+    "category": "Townhouses",
+    "description": "Modern townhouse designed with sustainability in mind, featuring energy-efficient appliances and solar panels.",
+    "price": "$550,000",
+    "status": "Sale",
+    "area": "2000 sq ft",
+    "location": "Portland, Oregon",
+    "facilities": ["living room", "rooftop garden", "bike storage"]
+  },
+  {
+    "image": "https://i.ibb.co/VHwhP09/usgbc-green-retirement-56a45f4b5f9b58b7d0d6a3ff.jpg",
+    "estate_title": "Senior Living Community",
+    "id": "8",
+    "category": "Senior living communities",
+    "description": "Community designed for seniors, offering a range of amenities and services for comfortable retirement living.",
+    "price": "$3,000/month",
+    "status": "Rent",
+    "area": "3500 sq ft",
+    "location": "Los Angeles, California",
+    "facilities": ["living room", "dining area", "assistance services"]
+  },
+  {
+    "image": "https://i.ibb.co/kGr5YHY/T735-Studierendenheim-Sheffield-Whittam-Cox-2.jpg",
+    "estate_title": "Student Housing",
+    "id": "9",
+    "category": "Student housing",
+    "description": "Modern student apartments near campus, featuring study lounges, fitness centers, and social spaces.",
+    "price": "$1,200/month",
+    "status": "Rent",
+    "area": "2200 sq ft",
+    "location": "Seattle, Washington",
+    "facilities": ["bedroom", "study area", "shared kitchen"]
+  },
+  {
+    "image": "https://i.ibb.co/HrWXsB9/nyc-brownstone-townhouses-hero.webp",
+    "estate_title": "Historic Brownstone",
+    "id": "010",
+    "category": "Heritage Homes",
+    "description": "Elegant brownstone with classic architectural details, situated in a historic neighborhood.",
+    "price": "$900,000",
+    "status": "Sale",
+    "area": "3500 sq ft",
+    "location": "Brooklyn, New York",
+    "facilities": ["living room", "garden", "library"]
+  }
+]

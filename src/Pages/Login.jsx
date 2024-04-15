@@ -1,34 +1,91 @@
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
+import { IoEyeOutline } from "react-icons/io5";
+import { FaRegEyeSlash } from "react-icons/fa";
+import "animate.css";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const Login = () => {
+  const { loginUser, googleSignIn } = useContext(AuthContext);
+  const [showPass, setShowPass] = useState(false);
+  const [loginError, setLoginError] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const email = form.get("email");
+    const password = form.get("password");
+
+    loginUser(email, password)
+      .then(() => {
+        MySwal.fire({
+          title: "Good job!",
+          text: "Login Succesfully",
+          icon: "success",
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        setLoginError(error.message);
+      });
+  };
+
+  const handleGoogleLogIn = () => {
+    googleSignIn()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center animate__animated animate__zoomIn items-center">
       <div className="w-full max-w-md p-8 space-y-3 shadow-lg border border-black rounded-xl dark:bg-gray-50 dark:text-gray-800">
         <h1 className="text-2xl font-bold text-center">Login</h1>
-        <form noValidate="" action="" className="space-y-6">
+        <form
+          onSubmit={handleLogin}
+          noValidate=""
+          action=""
+          className="space-y-6"
+        >
           <div className="space-y-1 text-sm">
             <label htmlFor="username" className="block dark:text-gray-600">
-              Username
+              Email
             </label>
             <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Username"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              className="w-full px-4 py-3 rounded-md border border-black dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label htmlFor="password" className="block dark:text-gray-600">
-              Password
+            <label className="label">
+              <span className="label-text">Password</span>
+              <span
+                className="relative top-11 text-xl mr-2"
+                onClick={() => setShowPass(!showPass)}
+              >
+                {showPass ? <IoEyeOutline /> : <FaRegEyeSlash />}
+              </span>
             </label>
             <input
-              type="password"
+              type={showPass ? "text" : "password"}
+              placeholder="password"
               name="password"
-              id="password"
-              placeholder="Password"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+              className="w-full px-4 py-3 rounded-md border border-black dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+              required
             />
+
             <div className="flex justify-end text-xs dark:text-gray-600">
               <a rel="noopener noreferrer" href="#">
                 Forgot Password?
@@ -38,6 +95,7 @@ const Login = () => {
           <button className="block w-full p-3 text-center rounded-sm dark:text-gray-50 dark:bg-violet-600">
             Sign in
           </button>
+          {loginError && <p className="text-red-800">{loginError}</p>}
         </form>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
@@ -47,7 +105,11 @@ const Login = () => {
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
         </div>
         <div className="flex justify-center space-x-4">
-          <button aria-label="Log in with Google" className="p-3 rounded-sm">
+          <button
+            onClick={handleGoogleLogIn}
+            aria-label="Log in with Google"
+            className="p-3 rounded-sm"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
