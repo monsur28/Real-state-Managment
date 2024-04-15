@@ -44,8 +44,8 @@ export default function App() {
               backgroundImage: `url(${img1})`,
             }}
           >
-            <div className="hero-overlay bg-opacity-30 rounded-2xl"></div>
-            <div className="hero-content text-center text-neutral-content">
+            <div className="hero-overlay bg-opacity-10 rounded-2xl"></div>
+            <div className="hero-content text-center text-white">
               <div className="max-w-md">
                 <h1 className="mb-5 text-5xl font-bold">
                   Charming Haven: Your Dream Single Home Awaits!
@@ -56,9 +56,6 @@ export default function App() {
                   neighborhood, this gem offers the perfect blend of classic
                   charm and contemporary luxury.
                 </p>
-                <button className="btn btn-primary">
-                  Explore Single Homes
-                </button>
               </div>
             </div>
           </div>
@@ -70,16 +67,18 @@ export default function App() {
               backgroundImage: `url(${img2})`,
             }}
           >
-            <div className="hero-overlay bg-opacity-30 rounded-2xl"></div>
+            <div className="hero-overlay bg-opacity-50 rounded-2xl"></div>
             <div className="hero-content text-center text-neutral-content">
               <div className="max-w-md">
-                <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+                <h1 className="mb-5 text-5xl font-bold">
+                  Urban Retreat: Modern Apartments for Elevated Living
+                </h1>
                 <p className="mb-5">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                  assumenda excepturi exercitationem quasi. In deleniti eaque
-                  aut repudiandae et a id nisi.
+                  Welcome to a haven of contemporary sophistication and urban
+                  convenience. These stylish apartments redefine city living,
+                  offering a fusion of sleek design, premium amenities, and
+                  unparalleled comfort.
                 </p>
-                <button className="btn btn-primary">Get Started</button>
               </div>
             </div>
           </div>
@@ -94,13 +93,16 @@ export default function App() {
             <div className="hero-overlay bg-opacity-30 rounded-2xl"></div>
             <div className="hero-content text-center text-neutral-content">
               <div className="max-w-md">
-                <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+                <h1 className="mb-5 text-5xl font-bold">
+                  Seaside Serenity: Your Ultimate Vacation Escape Awaits!
+                </h1>
                 <p className="mb-5">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                  assumenda excepturi exercitationem quasi. In deleniti eaque
-                  aut repudiandae et a id nisi.
+                  Immerse yourself in the ultimate coastal getaway with our
+                  stunning vacation rental. Perched on the shores of pristine
+                  beaches, this idyllic retreat offers unparalleled views and
+                  luxurious amenities that promise to make your stay
+                  unforgettable.
                 </p>
-                <button className="btn btn-primary">Get Started</button>
               </div>
             </div>
           </div>

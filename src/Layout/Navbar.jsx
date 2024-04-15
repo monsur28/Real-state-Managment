@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { RxAvatar } from "react-icons/rx";
 
 const MySwal = withReactContent(Swal);
 
@@ -80,15 +81,13 @@ const Navbar = () => {
             role="button"
             className="btn btn-ghost btn-circle avatar "
           >
-            {user && (
-              <div className="w-10 rounded-full">
+            {user ? (
+              <div className="w-10 rounded-full border border-gray-950">
                 <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
-                <div
-                  className="tooltip hover:data-tip"
-                  data-tip={user.displayName}
-                >
-                  <button className="btn">Hover me</button>
-                </div>
+              </div>
+            ) : (
+              <div className="w-10 rounded-full">
+                <RxAvatar className="text-[40px]" />
               </div>
             )}
           </div>

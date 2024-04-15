@@ -110,7 +110,7 @@
   {
     "image": "https://i.ibb.co/HrWXsB9/nyc-brownstone-townhouses-hero.webp",
     "estate_title": "Historic Brownstone",
-    "id": "010",
+    "id": "10",
     "category": "Heritage Homes",
     "description": "Elegant brownstone with classic architectural details, situated in a historic neighborhood.",
     "price": "$900,000",
@@ -118,5 +118,101 @@
     "area": "3500 sq ft",
     "location": "Brooklyn, New York",
     "facilities": ["living room", "garden", "library"]
+  },
+  {
+    "image": "https://a0.muscache.com/im/pictures/03b99bc7-f3e6-44c5-be75-57bb951b1077.jpg?im_w=1440",
+    "estate_title": "Secluded Mountain Retreat",
+    "id": "11",
+    "category": "Single-family homes",
+    "description": "Escape to this secluded mountain retreat, nestled among towering pines and breathtaking vistas.",
+    "price": "$1,200,000",
+    "status": "Sale",
+    "area": "3500 sq ft",
+    "location": "Aspen, Colorado",
+    "facilities": ["spacious living room", "fireplace", "mountain view"]
+  },
+  {
+    "image": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/424144870.jpg?k=ac0af595cd162a6b3b200d192735056d2c0f7741260d4860f53a749771451a78&o=&hp=1",
+    "estate_title": "Charming Urban Loft",
+    "id": "12",
+    "category": "Apartments",
+    "description": "Embrace city living in this charming urban loft, featuring exposed brick walls and industrial accents.",
+    "price": "$600,000",
+    "status": "Sale",
+    "area": "1500 sq ft",
+    "location": "San Francisco, California",
+    "facilities": ["open kitchen", "city skyline view", "rooftop terrace"]
+  },
+  {
+    "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/371707701.jpg?k=e3be1a2344a98a1e1e12b6626e98d153e0f6d255078704855299333f6f17b87b&o=&hp=1",
+    "estate_title": "Beachfront Paradise",
+    "id": "13",
+    "category": "Vacation Rentals",
+    "description": "Indulge in beachfront luxury at this tropical paradise, where every day feels like a vacation.",
+    "price": "$400/night",
+    "status": "Rent",
+    "area": "2000 sq ft",
+    "location": "Maui, Hawaii",
+    "facilities": ["private beach access", "infinity pool", "oceanfront deck"]
+  },
+  {
+    "image": "https://i.insider.com/5d66d8002e22af14406b83a6?width=700&format=jpeg&auto=webp",
+    "estate_title": "Elegant Senior Living Residence",
+    "id": "14",
+    "category": "Senior living communities",
+    "description": "Experience elegance and comfort in this upscale senior living residence, designed for a vibrant retirement lifestyle.",
+    "price": "$4,500/month",
+    "status": "Rent",
+    "area": "1800 sq ft",
+    "location": "Palm Springs, California",
+    "facilities": ["gourmet dining", "wellness center", "landscaped gardens"]
+  },
+  {
+    "image": "https://images.trvl-media.com/lodging/35000000/34420000/34418300/34418248/6fb3a38e.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+    "estate_title": "Historic Townhouse in the Heart of the City",
+    "id": "15",
+    "category": "Townhouses",
+    "description": "Live in luxury in this meticulously restored historic townhouse, centrally located for urban convenience.",
+    "price": "$1,800,000",
+    "status": "Sale",
+    "area": "2800 sq ft",
+    "location": "Boston, Massachusetts",
+    "facilities": ["private courtyard", "chef's kitchen", "elevator"]
+  },
+  {
+    "image": "https://www.americancampus.com/getmedia/38d900b0-e383-4469-97ca-9b04fbb621d1/695_Main-Hero_1440x576.jpg",
+    "estate_title": "Modern Student Apartments",
+    "id": "16",
+    "category": "Student housing",
+    "description": "Live in style and comfort at these modern student apartments, designed for academic success and socializing.",
+    "price": "$1,200/month",
+    "status": "Rent",
+    "area": "800 sq ft",
+    "location": "Austin, Texas",
+    "facilities": ["study lounge", "fitness center", "game room"]
+  },
+  {
+    "image": "https://a0.muscache.com/im/pictures/ce7cfedd-42a5-4f74-a93b-6026116e9895.jpg",
+    "estate_title": "Scenic Lakeside Cabin",
+    "id": "17",
+    "category": "Vacation Rentals",
+    "description": "Escape to nature at this scenic lakeside cabin, where tranquility and relaxation await.",
+    "price": "$300/night",
+    "status": "Rent",
+    "area": "1200 sq ft",
+    "location": "Lake Tahoe, California",
+    "facilities": ["private dock", "deck with hot tub", "mountain views"]
+  },
+  {
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkU3o6S8abJYOHjp2lDtaahfHGNWCgtzxgMPsfKwbqHQ&s",
+    "estate_title": "Family-Friendly Suburban Home",
+    "id": "18",
+    "category": "Single-family homes",
+    "description": "Settle into suburban bliss in this family-friendly home, with plenty of space for play and relaxation.",
+    "price": "$700,000",
+    "status": "Sale",
+    "area": "3200 sq ft",
+    "location": "Charlotte, North Carolina",
+    "facilities": ["backyard playground", "home theater", "gourmet kitchen"]
   }
 ]

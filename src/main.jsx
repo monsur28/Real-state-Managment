@@ -9,6 +9,7 @@ import Register from "./Pages/Register";
 import AuthProvider from "./Providers/AuthProvider";
 import Profile from "./Pages/Profile";
 import PrivateRoute from "./Routers/PrivateRoute";
+import EstateCardDetails from "./Layout/EstateCardDetails";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,6 +18,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/:id",
+        element: (
+          <PrivateRoute>
+            <EstateCardDetails />
+          </PrivateRoute>
+        ),
         loader: () => fetch("residentialData.json"),
       },
       {
