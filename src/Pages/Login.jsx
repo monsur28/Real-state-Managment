@@ -12,7 +12,6 @@ const MySwal = withReactContent(Swal);
 const Login = () => {
   const { loginUser, googleSignIn } = useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
-  const [loginError, setLoginError] = useState("");
 
   const navigate = useNavigate();
 
@@ -32,7 +31,11 @@ const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        setLoginError(error.message);
+        MySwal.fire({
+          icon: "warning",
+          title: "Oops...",
+          text: `${error.message}`,
+        });
       });
   };
 
@@ -95,7 +98,6 @@ const Login = () => {
           <button className="block w-full p-3 text-center rounded-sm dark:text-gray-50 dark:bg-violet-600">
             Sign in
           </button>
-          {loginError && <p className="text-red-800">{loginError}</p>}
         </form>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>

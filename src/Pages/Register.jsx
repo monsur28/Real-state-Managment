@@ -90,13 +90,20 @@ const Register = () => {
             <label htmlFor="PhotoUrl" className="block dark:text-gray-600">
               Photo Url
             </label>
+
             <input
+              type="file"
+              name="photo"
+              accept="image/*"
+              className="w-full px-4 py-3 rounded-md border border-black dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+            />
+            {/* <input
               type="text"
               name="photo"
               id="photoUrl"
               placeholder="Photo Url"
               className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
-            />
+            /> */}
             <label htmlFor="Email" className="block dark:text-gray-600">
               Email
             </label>
@@ -105,7 +112,7 @@ const Register = () => {
               name="email"
               id="email"
               placeholder="Email"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+              className="w-full px-4 py-3 rounded-md border border-black dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
             />
           </div>
           <div className="space-y-1 text-sm">
