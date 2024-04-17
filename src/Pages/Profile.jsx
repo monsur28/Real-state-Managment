@@ -1,30 +1,16 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import { useEffect, useState } from "react";
-import { onAuthStateChanged, updateProfile } from "firebase/auth";
-import { auth } from "../Firebase/firebase.config";
+import { useContext, useState } from "react";
+
+import { AuthContext } from "../Providers/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 const Profile = () => {
-  const [user, setUser] = useState(null);
+  const { user, loading } = useContext(AuthContext);
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [isEdit, setIsEdit] = useState(false);
   const [photoURL, setPhotoURL] = useState("");
   const [image, setImage] = useState(null);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        setName(currentUser.displayName);
-        setEmail(currentUser.email);
-        setPhotoURL(currentUser.photoURL);
-        setImage(currentUser.photoURL);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   const handleEdit = () => {
     setIsEdit(true);
@@ -40,6 +26,7 @@ const Profile = () => {
     try {
       await updateProfile(user, { displayName: name, photoURL });
       setIsEdit(false);
+      loading(true);
     } catch (error) {
       console.error("Error updating profile:", error);
     }
@@ -64,52 +51,77 @@ const Profile = () => {
           <Tab>Profile</Tab>
         </TabList>
         <TabPanel>
-          <div>
-            {user ? (
-              <div>
+          <div className="border border-black flex justify-center items-center p-5">
+            <div>
+              <div className="flex gap-3">
                 <div>
-                  <label>Name:</label>
+                  <label htmlFor="Name" className="block  dark:text-gray-600 ">
+                    Name
+                  </label>
                   <input
                     type="text"
-                    value={name}
+                    name="name"
+                    id="name"
+                    placeholder="Name"
+                    value={user.displayName}
                     onChange={handleChangeName}
                     disabled={!isEdit}
+                    className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 border border-black dark:text-gray-800 focus:dark:border-violet-600"
                   />
+                  <div>
+                    <label>Email:</label>
+                    <input
+                      type="email"
+                      className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 border border-black dark:text-gray-800 focus:dark:border-violet-600"
+                      value={user.email}
+                      disabled
+                    />
+                  </div>
                 </div>
                 <div>
                   <label>Profile Picture:</label>
-                  {photoURL ? (
+                  {user ? (
                     <img
-                      src={photoURL}
+                      src={user.photoURL}
                       alt="Profile"
                       className="block w-32 h-32 rounded-full mb-2"
                     />
                   ) : (
                     <input
                       type="file"
-                      value={image}
                       accept="image/*"
+                      value={user.photoURL}
                       onChange={handleChangeImage}
                       disabled={!isEdit}
                     />
                   )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleChangeImage}
+                    disabled={!isEdit}
+                  />
                 </div>
-                <div>
-                  <label>Email:</label>
-                  <input type="email" value={email} disabled />
-                </div>
-                {!isEdit ? (
-                  <button onClick={handleEdit}>Edit</button>
-                ) : (
-                  <div>
-                    <button onClick={handleSave}>Save</button>
-                    <button onClick={handleCancelEdit}>Cancel</button>
-                  </div>
-                )}
               </div>
-            ) : (
-              <div>Please log in to view your profile.</div>
-            )}
+
+              {!isEdit ? (
+                <button className="btn btn-secondary" onClick={handleEdit}>
+                  Edit
+                </button>
+              ) : (
+                <div className="flex gap-4">
+                  <button className="btn btn-success" onClick={handleSave}>
+                    Save
+                  </button>
+                  <button
+                    className="btn btn-warning"
+                    onClick={handleCancelEdit}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </TabPanel>
       </Tabs>

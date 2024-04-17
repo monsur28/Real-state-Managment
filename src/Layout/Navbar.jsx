@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
-import { ToastContainer, toast } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -14,7 +14,11 @@ const Navbar = () => {
   const handleLogOut = () => {
     logOut()
       .then(() => {
-        toast.success("LogOut Sucessfully");
+        MySwal.fire({
+          title: "Good job!",
+          text: "LogOut Succesfully",
+          icon: "success",
+        });
       })
       .catch((error) => {
         MySwal.fire({
@@ -103,7 +107,6 @@ const Navbar = () => {
             )}
           </div>
         </div>
-        <ToastContainer />
       </div>
     </div>
   );
