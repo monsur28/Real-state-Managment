@@ -43,6 +43,7 @@ const router = createBrowserRouter([
             <Profile />
           </PrivateRoute>
         ),
+        loader: () => fetch("residentialData.json"),
       },
     ],
   },

@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { RxAvatar } from "react-icons/rx";
+import logo from "../assets/logo2.png";
 
 const MySwal = withReactContent(Swal);
 
@@ -72,7 +73,7 @@ const Navbar = () => {
           </ul>
         </div>
         <NavLink to="/">
-          <img className="w-1/2 text-xl" src="/src/assets/logo2.png" alt="" />
+          <img className="w-1/2 text-xl" src={logo} alt="" />
         </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">

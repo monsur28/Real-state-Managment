@@ -4,13 +4,23 @@ import { useContext, useState } from "react";
 
 import { AuthContext } from "../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
+import { useLoaderData } from "react-router-dom";
+import EstateBookList from "../Layout/EstateBookList";
 
 const Profile = () => {
+  const estateData = useLoaderData();
+  const storedBooks = JSON.parse(localStorage.getItem("estates") || "[]");
+
   const { user, loading } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [isEdit, setIsEdit] = useState(false);
   const [photoURL, setPhotoURL] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [image, setImage] = useState(null);
+
+  const estateBookList = estateData.filter((book) =>
+    storedBooks.some((b) => b.id === book.id)
+  );
 
   const handleEdit = () => {
     setIsEdit(true);
@@ -49,6 +59,7 @@ const Profile = () => {
       <Tabs>
         <TabList>
           <Tab>Profile</Tab>
+          <Tab>Booked Property</Tab>
         </TabList>
         <TabPanel>
           <div className="border border-black flex justify-center items-center p-5">
@@ -123,6 +134,13 @@ const Profile = () => {
               )}
             </div>
           </div>
+        </TabPanel>
+        <TabPanel>
+          <ul>
+            {estateBookList.map((item) => (
+              <EstateBookList key={item.id} item={item}></EstateBookList>
+            ))}
+          </ul>
         </TabPanel>
       </Tabs>
     </div>

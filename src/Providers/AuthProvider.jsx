@@ -11,9 +11,17 @@ import PropTypes from "prop-types";
 
 export const AuthContext = createContext(null);
 
-import { GoogleAuthProvider } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  TwitterAuthProvider,
+} from "firebase/auth";
 
 const provider = new GoogleAuthProvider();
+
+const gitProvider = new GithubAuthProvider();
+
+const twitterProvider = new TwitterAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -49,6 +57,14 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, provider);
   };
 
+  const gitHubSignIn = () => {
+    return signInWithPopup(auth, gitProvider);
+  };
+
+  const twitterSignIn = () => {
+    return signInWithPopup(auth, twitterProvider);
+  };
+
   if (loading) {
     return (
       <span className="loading loading-bars flex justify-center items-center loading-lg"></span>
@@ -60,6 +76,8 @@ const AuthProvider = ({ children }) => {
     loginUser,
     logOut,
     googleSignIn,
+    gitHubSignIn,
+    twitterSignIn,
     loading,
   };
   return (

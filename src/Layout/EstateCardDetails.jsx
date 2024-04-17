@@ -43,35 +43,6 @@ const EstateCardDetails = () => {
     }
   };
 
-  const handleSaveClick = () => {
-    let storedSaveList = JSON.parse(localStorage.getItem("savelist") || "[]");
-    const isWishlist = storedSaveList.find((b) => b.id === estate.id);
-    if (isWishlist) {
-      MySwal.fire({
-        icon: "warning",
-        title: "Oops...",
-        text: "This Property is already in your Savelist.",
-      });
-    } else {
-      let storedSave = JSON.parse(localStorage.getItem("estates") || "[]");
-      const isBooked = storedSave.find((b) => b.id === estate.id);
-      if (isBooked) {
-        MySwal.fire({
-          icon: "warning",
-          title: "Oops...",
-          text: "This Property is already marked as Booked.",
-        });
-      } else {
-        storedSaveList.push(estate);
-        localStorage.setItem("savelist", JSON.stringify(storedSaveList));
-        MySwal.fire({
-          title: "Good job!",
-          text: "This Property added to Savelist.",
-          icon: "success",
-        });
-      }
-    }
-  };
   const {
     image,
     estate_title,
@@ -136,15 +107,9 @@ const EstateCardDetails = () => {
             <div className="mt-8 flex gap-4">
               <button
                 onClick={handleBuyNowClick}
-                className="btn py-[18px] px-7 bg-white border border-[#1313134d] font-semibold"
+                className="btn w-full py-[18px] px-7 bg-white border border-[#1313134d] font-semibold"
               >
                 Buy Now
-              </button>
-              <button
-                onClick={handleSaveClick}
-                className="btn py-[18px] px-7 bg-white border border-[#1313134d] font-semibold"
-              >
-                Save For Now
               </button>
             </div>
           </div>
