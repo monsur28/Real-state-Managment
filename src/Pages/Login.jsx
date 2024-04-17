@@ -60,15 +60,15 @@ const Login = () => {
       });
   };
 
-  // const handleTwitterLogIn = () => {
-  //   twitterSignIn()
-  //     .then(() => {
-  //       navigate("/");
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
+  const handleTwitterLogIn = () => {
+    twitterSignIn()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <div className="flex justify-center animate__animated animate__zoomIn items-center">
