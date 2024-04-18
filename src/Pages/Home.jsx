@@ -3,7 +3,7 @@ import "animate.css";
 import EstateCards from "../Layout/EstateCards";
 const Home = () => {
   return (
-    <div className="animate__zoomIn ">
+    <div className="animate__animated animate__zoomIn ">
       <Banner />
       <EstateCards />
     </div>

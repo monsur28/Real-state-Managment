@@ -1,5 +1,7 @@
 Project Summary: King Real Estates - Luxury Real Estate Website
 
+Live Link : https://b9a9-real-state-assignment.netlify.app/
+
 King Real Estates is a sophisticated real estate platform catering exclusively to luxury property seekers. Focused on delivering an unparalleled experience, the website showcases a curated selection of opulent residences including penthouses, beachfront properties, resorts, private islands, villas, and mansions.
 
 Uses Of npm packges
