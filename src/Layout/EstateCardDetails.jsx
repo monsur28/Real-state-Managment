@@ -109,7 +109,7 @@ const EstateCardDetails = () => {
                 onClick={handleBuyNowClick}
                 className="btn w-full py-[18px] px-7 bg-white border border-[#1313134d] font-semibold"
               >
-                Buy Now
+                Book Now
               </button>
             </div>
           </div>

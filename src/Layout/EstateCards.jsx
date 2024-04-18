@@ -4,14 +4,13 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 const EstateCards = () => {
   const [estateCardData, setEstateCardData] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
     fetch("residentialData.json")
       .then((res) => res.json())
       .then((data) => setEstateCardData(data));
   }, []);
-
-  const [selectedCategory, setSelectedCategory] = useState("All");
 
   // Filter data based on category
   const filteredData =

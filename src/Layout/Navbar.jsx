@@ -12,6 +12,7 @@ const MySwal = withReactContent(Swal);
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -77,6 +78,13 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end ">
+        {user ? (
+          <div className="mr-1 border border-gray-400 rounded-lg p-2">
+            {user.email}
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="dropdown dropdown-end flex items-center gap-3">
           <div
             tabIndex={0}

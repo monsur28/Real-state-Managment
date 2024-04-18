@@ -26,7 +26,9 @@ const EstateBookList = ({ item }) => {
         />
       </div>
       <div className="grid col-span-3 text-left">
-        <h1 className="text-2xl font-bold">{estate_title}</h1>
+        <div className="flex gap-11 items-center">
+          <h1 className="text-2xl font-bold">{estate_title}</h1>
+        </div>
         <h3>{description}</h3>
         <div className="flex items-center gap-6">
           <div>

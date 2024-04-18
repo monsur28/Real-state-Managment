@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 
 import { AuthContext } from "../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import EstateBookList from "../Layout/EstateBookList";
 
 import Swal from "sweetalert2";
@@ -22,7 +22,6 @@ const Profile = () => {
   const [photoURL, setPhotoURL] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [image, setImage] = useState(null);
-  const navigate = useNavigate();
 
   const estateBookList = estateData.filter((book) =>
     storedBooks.some((b) => b.id === book.id)
@@ -52,7 +51,6 @@ const Profile = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire("Saved!", "", "success");
-          navigate("/");
         } else if (result.isDenied) {
           Swal.fire("Changes are not saved", "", "info");
         }
@@ -117,26 +115,29 @@ const Profile = () => {
                       value={user.email}
                       disabled
                     />
-                    <label>Profile Picture:</label>
-                    <input
-                      type="text"
-                      name="photo"
-                      id="photo"
-                      placeholder="Photo Url"
-                      value={user.photoURL}
-                      onChange={handleChangeImage}
-                      disabled={!isEdit}
-                      className="w-full mb-3 px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 border border-black dark:text-gray-800 focus:dark:border-violet-600"
-                    />
                   </div>
                 </div>
-              </div>f
+                <div>
+                  <label>Profile Picture:</label>
+                  <input
+                    type="text"
+                    name="photo"
+                    id="photo"
+                    placeholder="Photo Url"
+                    value={user.photoURL}
+                    onChange={handleChangeImage}
+                    disabled={!isEdit}
+                    className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 border border-black dark:text-gray-800 focus:dark:border-violet-600"
+                  />
+                </div>
+              </div>
+
               {!isEdit ? (
-                <button className="btn btn-secondary" onClick={handleEdit}>
+                <button className="btn mt-2 btn-secondary" onClick={handleEdit}>
                   Edit
                 </button>
               ) : (
-                <div className="flex gap-4">
+                <div className="flex gap-4 mt-2">
                   <button className="btn btn-success" onClick={handleSave}>
                     Save
                   </button>
@@ -148,6 +149,9 @@ const Profile = () => {
                   </button>
                 </div>
               )}
+              <div className="mt-4 border text-center border-rose-400 p-3 rounded-xl">
+                <p>----After Add Name & Image Please Reload The Page----</p>
+              </div>
             </div>
           </div>
         </TabPanel>
