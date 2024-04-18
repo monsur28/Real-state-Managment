@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import { IoEyeOutline } from "react-icons/io5";
 import { FaRegEyeSlash } from "react-icons/fa";
 import "animate.css";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useForm } from "react-hook-form";
 
 const MySwal = withReactContent(Swal);
 
@@ -13,15 +14,16 @@ const Login = () => {
   const { loginUser, googleSignIn, gitHubSignIn, twitterSignIn } =
     useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
-
   const navigate = useNavigate();
+  const location = useLocation();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const form = new FormData(e.currentTarget);
-    const email = form.get("email");
-    const password = form.get("password");
-
+  const onSubmit = (data) => {
+    const { email, password } = data;
     loginUser(email, password)
       .then(() => {
         MySwal.fire({
@@ -29,7 +31,7 @@ const Login = () => {
           text: "Login Succesfully",
           icon: "success",
         });
-        navigate("/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         MySwal.fire({
@@ -75,7 +77,7 @@ const Login = () => {
       <div className="w-full max-w-md p-8 space-y-3 shadow-lg border border-black rounded-xl dark:bg-gray-50 dark:text-gray-800">
         <h1 className="text-2xl font-bold text-center">Login</h1>
         <form
-          onSubmit={handleLogin}
+          onSubmit={handleSubmit(onSubmit)}
           noValidate=""
           action=""
           className="space-y-6"
@@ -90,7 +92,11 @@ const Login = () => {
               id="email"
               placeholder="Email"
               className="w-full px-4 py-3 rounded-md border border-black dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+              {...register("email", { required: true })}
             />
+            {errors.email && (
+              <span className="text-red-600">This field is required</span>
+            )}
           </div>
           <div className="space-y-1 text-sm">
             <label className="label">
@@ -107,9 +113,11 @@ const Login = () => {
               placeholder="password"
               name="password"
               className="w-full px-4 py-3 rounded-md border border-black dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
-              required
+              {...register("password", { required: true })}
             />
-
+            {errors.password && (
+              <span className="text-red-600">This field is required</span>
+            )}
             <div className="flex justify-end text-xs dark:text-gray-600">
               <a rel="noopener noreferrer" href="#">
                 Forgot Password?

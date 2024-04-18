@@ -4,19 +4,25 @@ import { useContext, useState } from "react";
 
 import { AuthContext } from "../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import EstateBookList from "../Layout/EstateBookList";
+
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const Profile = () => {
   const estateData = useLoaderData();
   const storedBooks = JSON.parse(localStorage.getItem("estates") || "[]");
 
-  const { user, loading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [isEdit, setIsEdit] = useState(false);
   const [photoURL, setPhotoURL] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [image, setImage] = useState(null);
+  const navigate = useNavigate();
 
   const estateBookList = estateData.filter((book) =>
     storedBooks.some((b) => b.id === book.id)
@@ -36,7 +42,21 @@ const Profile = () => {
     try {
       await updateProfile(user, { displayName: name, photoURL });
       setIsEdit(false);
-      loading(true);
+
+      MySwal.fire({
+        title: "Do you want to save the changes?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `Don't save`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Saved!", "", "success");
+          navigate("/");
+        } else if (result.isDenied) {
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
     } catch (error) {
       console.error("Error updating profile:", error);
     }
@@ -46,12 +66,33 @@ const Profile = () => {
     setName(e.target.value);
   };
 
+  // const handleChangeImage = (e) => {
+  //   if (e.target.files[0]) {
+  //     const file = e.target.files[0];
+  //     setImage(file);
+  //     setPhotoURL(URL.createObjectURL(file));
+  //   }
+  // };
+
   const handleChangeImage = (e) => {
-    if (e.target.files[0]) {
-      const file = e.target.files[0];
-      setImage(file);
-      setPhotoURL(URL.createObjectURL(file));
+    const input = e.target.value;
+    if (input) {
+      // Check if the input is a valid URL
+      if (isValidURL(input)) {
+        setPhotoURL(input);
+      } else {
+        // If not a valid URL, treat it as a file upload
+        const file = e.target.files[0];
+        setImage(file);
+        setPhotoURL(URL.createObjectURL(file));
+      }
     }
+  };
+
+  const isValidURL = (url) => {
+    // Regular expression to validate URLs
+    const pattern = /^(http|https):\/\/[^ "]+$/;
+    return pattern.test(url);
   };
 
   return (
@@ -91,26 +132,15 @@ const Profile = () => {
                 </div>
                 <div>
                   <label>Profile Picture:</label>
-                  {user ? (
-                    <img
-                      src={user.photoURL}
-                      alt="Profile"
-                      className="block w-32 h-32 rounded-full mb-2"
-                    />
-                  ) : (
-                    <input
-                      type="file"
-                      accept="image/*"
-                      value={user.photoURL}
-                      onChange={handleChangeImage}
-                      disabled={!isEdit}
-                    />
-                  )}
                   <input
-                    type="file"
-                    accept="image/*"
+                    type="text"
+                    name="photo"
+                    id="photo"
+                    placeholder="Photo Url"
+                    value={user.photoURL}
                     onChange={handleChangeImage}
                     disabled={!isEdit}
+                    className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 border border-black dark:text-gray-800 focus:dark:border-violet-600"
                   />
                 </div>
               </div>

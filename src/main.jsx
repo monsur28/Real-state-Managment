@@ -10,10 +10,12 @@ import AuthProvider from "./Providers/AuthProvider";
 import Profile from "./Pages/Profile";
 import PrivateRoute from "./Routers/PrivateRoute";
 import EstateCardDetails from "./Layout/EstateCardDetails";
+import ErrorPage from "./Pages/ErrorPage";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",

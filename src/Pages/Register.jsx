@@ -6,6 +6,7 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import "animate.css";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useForm } from "react-hook-form";
 
 const MySwal = withReactContent(Swal);
 
@@ -15,15 +16,14 @@ const Register = () => {
   const [registerError, setRegisterError] = useState("");
   const [showPass, setShowPass] = useState(false);
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    const form = new FormData(e.currentTarget);
-    const name = form.get("name");
-    const photo = form.get("photo");
-    const email = form.get("email");
-    const password = form.get("password");
-    console.log(name, photo, email, password);
+  const onSubmit = (data) => {
+    const { email, password } = data;
     if (password.length < 6) {
       setRegisterError("Password Should be at least 6 characters or longer");
       return;
@@ -92,7 +92,7 @@ const Register = () => {
       <div className="w-full max-w-md p-8 shadow-lg border border-black space-y-3 rounded-xl dark:bg-gray-50 dark:text-gray-800">
         <h1 className="text-2xl font-bold text-center">Register</h1>
         <form
-          onSubmit={handleRegister}
+          onSubmit={handleSubmit(onSubmit)}
           noValidate=""
           action=""
           className="space-y-6"
@@ -106,25 +106,23 @@ const Register = () => {
               name="name"
               id="name"
               placeholder="Name"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+              className="w-full px-4 py-3 rounded-md border border-black dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+              {...register("name", { required: true })}
             />
+            {errors.name && (
+              <span className="text-red-600">This field is required</span>
+            )}
             <label htmlFor="PhotoUrl" className="block dark:text-gray-600">
               Photo Url
             </label>
-
             <input
-              type="file"
-              name="photo"
-              accept="image/*"
-              className="w-full px-4 py-3 rounded-md border border-black dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
-            />
-            {/* <input
               type="text"
               name="photo"
               id="photoUrl"
               placeholder="Photo Url"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
-            /> */}
+              className="w-full px-4 py-3 rounded-md border border-black dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+              {...register("photo")}
+            />
             <label htmlFor="Email" className="block dark:text-gray-600">
               Email
             </label>
@@ -134,9 +132,11 @@ const Register = () => {
               id="email"
               placeholder="Email"
               className="w-full px-4 py-3 rounded-md border border-black dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+              {...register("email", { required: true })}
             />
-          </div>
-          <div className="space-y-1 text-sm">
+            {errors.email && (
+              <span className="text-red-600">This field is required</span>
+            )}
             <label className="label">
               <span className="label-text">Password</span>
               <span
@@ -151,15 +151,18 @@ const Register = () => {
               placeholder="password"
               name="password"
               className="w-full px-4 py-3 rounded-md border border-black dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
-              required
+              {...register("password", { required: true })}
             />
-            <div className="flex justify-end text-xs dark:text-gray-600">
-              <a rel="noopener noreferrer" href="#">
-                Forgot Password?
-              </a>
-            </div>
+            {errors.password && (
+              <span className="text-red-600">This field is required</span>
+            )}
           </div>
-          <button className="block w-full p-3 text-center rounded-sm dark:text-gray-50 dark:bg-violet-600">
+          <div className="flex justify-end text-xs dark:text-gray-600">
+            <a rel="noopener noreferrer" href="#">
+              Forgot Password?
+            </a>
+          </div>
+          <button className="btn btn-success block w-full p-3 text-center rounded-sm dark:text-gray-50 dark:bg-violet-600">
             Sign in
           </button>
           {registerError && <p className="text-red-800">{registerError}</p>}

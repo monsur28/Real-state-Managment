@@ -40,9 +40,6 @@ const Navbar = () => {
           <NavLink to="/profile">Profile</NavLink>
         </li>
       )}
-      <li>
-        <NavLink to="/contact">Contact</NavLink>
-      </li>
     </>
   );
   return (
@@ -87,7 +84,10 @@ const Navbar = () => {
             className="btn btn-ghost btn-circle avatar "
           >
             {user ? (
-              <div className="w-10 rounded-full border border-gray-950">
+              <div
+                className="w-10 rounded-full border border-gray-950"
+                title={user.displayName}
+              >
                 <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
               </div>
             ) : (
