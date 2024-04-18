@@ -66,22 +66,12 @@ const Profile = () => {
     setName(e.target.value);
   };
 
-  // const handleChangeImage = (e) => {
-  //   if (e.target.files[0]) {
-  //     const file = e.target.files[0];
-  //     setImage(file);
-  //     setPhotoURL(URL.createObjectURL(file));
-  //   }
-  // };
-
   const handleChangeImage = (e) => {
     const input = e.target.value;
     if (input) {
-      // Check if the input is a valid URL
       if (isValidURL(input)) {
         setPhotoURL(input);
       } else {
-        // If not a valid URL, treat it as a file upload
         const file = e.target.files[0];
         setImage(file);
         setPhotoURL(URL.createObjectURL(file));
@@ -90,7 +80,6 @@ const Profile = () => {
   };
 
   const isValidURL = (url) => {
-    // Regular expression to validate URLs
     const pattern = /^(http|https):\/\/[^ "]+$/;
     return pattern.test(url);
   };
@@ -128,23 +117,20 @@ const Profile = () => {
                       value={user.email}
                       disabled
                     />
+                    <label>Profile Picture:</label>
+                    <input
+                      type="text"
+                      name="photo"
+                      id="photo"
+                      placeholder="Photo Url"
+                      value={user.photoURL}
+                      onChange={handleChangeImage}
+                      disabled={!isEdit}
+                      className="w-full mb-3 px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 border border-black dark:text-gray-800 focus:dark:border-violet-600"
+                    />
                   </div>
                 </div>
-                <div>
-                  <label>Profile Picture:</label>
-                  <input
-                    type="text"
-                    name="photo"
-                    id="photo"
-                    placeholder="Photo Url"
-                    value={user.photoURL}
-                    onChange={handleChangeImage}
-                    disabled={!isEdit}
-                    className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 border border-black dark:text-gray-800 focus:dark:border-violet-600"
-                  />
-                </div>
-              </div>
-
+              </div>f
               {!isEdit ? (
                 <button className="btn btn-secondary" onClick={handleEdit}>
                   Edit
